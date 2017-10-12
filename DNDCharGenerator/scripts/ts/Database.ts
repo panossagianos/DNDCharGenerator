@@ -10,7 +10,7 @@ namespace DNDCharacterGenerator {
         /**
          * Character Alignments.
          */
-        export namespace Alignment {
+        export namespace Alignments {
             export let lawfulGood = new gen.Alignment("Lawful Good"
                 , "Lawful good (LG) creatures can be counted on to do the right thing as expected by society."
                 + " Gold dragons, paladins, and most dwarves are lawful good."
@@ -52,7 +52,7 @@ namespace DNDCharacterGenerator {
         /**
          * Character core Abilities.
          */
-        export namespace Ability {
+        export namespace Abilities {
             /** Measures physical power.*/
             export let strength = new gen.Ability("Strength"
                 , "Strength measures bodily power, athletic Training, and the extent to which you can exert"
@@ -71,8 +71,8 @@ namespace DNDCharacterGenerator {
         /**
          * All available skills.
          */
-        export namespace Skill {
-            import abl = DNDCharacterGenerator.Database.Ability;
+        export namespace Skills {
+            import abl = DNDCharacterGenerator.Database.Abilities;
             /** Covers difficult situations you encounter while climbing, Jumping, or swimming.*/
             export let athletics = new gen.Skill("Athletics"
                 , "Your Strength (Athletics) check covers difficult situations you encounter"
@@ -219,7 +219,7 @@ namespace DNDCharacterGenerator {
         /**
          * All traits granted by races and sub races.
          */
-        export namespace Trait {
+        export namespace Traits {
             /**
              * Colorless clear low light vision - 60ft radius.
              */
@@ -234,15 +234,41 @@ namespace DNDCharacterGenerator {
             export let dwarvenResilience = new gen.Trait("Dwarven Resilience"
                 , "You have advantage on saving throws against poison, and you have Resistance against poison damage."
                 , "Poison damage resistance and saving throws against it.");
+            /**
+             * Proficiency with Battleaxe, Handaxe, Light Hammer and Warhammer.
+             */
+            export let dwarvenCombatTraining = new gen.Trait("Dwarven Combat Training"
+                , "You have proficiency with the Battleaxe, Handaxe, Light Hammer, and Warhammer."
+                , "Proficiency with Battleaxe, Handaxe, Light Hammer and Warhammer.");
+            /**
+             * Proficiency with artisan's tools of choice.
+             */
+            export let toolProficiency = new gen.Trait("Tool Proficiency"
+                , "You gain proficiency with the artisan’s tools of your choice: smith’s tools, brewer’s supplies, or mason’s tools."
+                , "Proficiency with artisan's tools of choice.");
+            /**
+             * Add double your proficiency bonus on History checks about stonework.
+             */
+            export let stonecunning = new gen.Trait("Stonecunning"
+                , "Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient"
+                + " in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus."
+                , "Add double your proficiency bonus on History checks about stonework.");
+            /**
+             * Max HP +1 and +1 / Level.
+             */
+            export let dwarvenToughness = new gen.Trait("Dwarven Toughness"
+                , "Your hit point maximum increases by 1, and it increases by 1 every time you gain a level."
+                , "Max HP +1 and +1 / Level.");
         }
         /**
-         * The different character races.
+         * The various character races.
          */
-        export namespace Race {
-            import align = DNDCharacterGenerator.Database.Alignment;
-            import abl = DNDCharacterGenerator.Database.Ability;
+        export namespace Races {
+            import align = DNDCharacterGenerator.Database.Alignments;
+            import abl = DNDCharacterGenerator.Database.Abilities;
+            import trts = DNDCharacterGenerator.Database.Traits;
             /**
-             * A short stocky race taht stands about a foot shorter than most humans.
+             * A short stocky race that stands about a foot shorter than most humans.
              * They have wide, compact bodies that account for their burly appearance.
              */
             export let dwarf = new gen.Race("Dwarf"
@@ -256,8 +282,22 @@ namespace DNDCharacterGenerator {
                 , gen.characterSize.Medium
                 , 25
                 , [gen.language.Common, gen.language.Dwarvish]
-                , [<gen.ITrait>undefined]
+                , [trts.darkVision, trts.dwarvenCombatTraining, trts.dwarvenResilience, trts.stonecunning, trts.toolProficiency]
                 , [abl.constitution, 2]);
+        }
+        /**
+         * The various character sub races.
+         */
+        export namespace SubRaces {
+            import races = DNDCharacterGenerator.Database.Races;
+            import trts = DNDCharacterGenerator.Database.Traits;
+            /**
+             * As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience.
+             */
+            export let hillDwarf = new gen.SubRace("Hill Dwarf"
+                , "As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience."
+                , races.dwarf
+                , [trts.dwarvenToughness]);
         }
     }    
 }
