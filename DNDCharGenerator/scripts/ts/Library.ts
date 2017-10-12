@@ -61,8 +61,6 @@
             Languages: IProperty<language[]>;
             /** A list of the traits granted by the current race.*/
             Traits: IProperty<ITrait[]>;
-            /** A list of Ability adjustments that the current race applies to a character.*/
-            Abilityadjustments: IProperty<[IAbility, number]>;
         }
         /** A further segmentation of Races.*/
         export interface ISubRace extends IGameObjectProperty {
@@ -82,6 +80,13 @@
         export interface ITrait extends IGameObjectProperty {
             /** An very short description of the trait to be used in notes.*/
             ShortDescription: IProperty<string>;
+        }
+        /** A change to an ability score provided by a race or sub race.*/
+        interface IAbilityIncrease extends ITrait {
+            /** The ability to increase.*/
+            readonly Ability: IAbility;
+            /** The score to be added to that ability's score.*/
+            readonly Bonus: number;
         }
         /** One of the basic character abilities.*/
         export interface IAbility extends IGameObjectProperty {
@@ -254,11 +259,9 @@
              * @param speed The base speed of characters of the current race in feet.
              * @param languages A list of the languages commonly spoken by characters of the current race.
              * @param traits A list of the traits granted by the current race.
-             * @param abilityAdjustments A list of ability adjustments that the current race applies to a character.
              */
             constructor(name: string, description: string, age: number, alignment: IAlignment
-                , size: characterSize, speed: number, languages: language[], traits: ITrait[]
-                , abilityAdjustments: [IAbility, number]) {
+                , size: characterSize, speed: number, languages: language[], traits: ITrait[]) {
                 this.Name.Value = name;
                 this.Description.Value = description;
                 this.Age.Value = age;
@@ -267,7 +270,6 @@
                 this.Speed.Value = speed;
                 this.Languages.Value = languages;
                 this.Traits.Value = traits;
-                this.Abilityadjustments.Value = abilityAdjustments;
             }
 
             /** The name of the current race.*/
@@ -314,12 +316,6 @@
                 Description: "A list of the traits granted by the current race.",
                 Value: <ITrait[]>undefined
             }
-            /** A list of Ability adjustments that the current race applies to a character.*/
-            Abilityadjustments: IProperty<[IAbility, number]> = {
-                Name: "Ability Adjustments",
-                Description: "A list of ability adjustments that the current race applies to a character.",
-                Value: <[IAbility, number]>undefined
-            };
         }
         export class SubRace implements ISubRace {
             /**
@@ -704,6 +700,26 @@
                 Description: "A short description of the trait to be used in notes.",
                 Value: <string>undefined
             }
+        }
+        export class AbilityIncrease extends Trait implements IAbilityIncrease {
+            /**
+             * An ability modification provided by a race or sub race as a trait.
+             * @param name The name of the trait.
+             * @param description A description of the trait.
+             * @param shortdescription A short description of the trait to be used in notes.
+             * @param ability The ability to be modified.
+             * @param bonus The bonus to be applied to the ability's score.
+             */
+            constructor(name: string, description: string, shortdescription: string, ability: IAbility, bonus: number)
+            {
+                super(name, description, shortdescription);
+                this.Ability = ability;
+                this.Bonus = bonus;
+            }
+            /** The ability to be modified.*/
+            public Ability: IAbility;
+            /** The applied bonus to the ability's score.*/
+            public Bonus: number;
         }
         export class Weapon implements IWeapon {
             /**

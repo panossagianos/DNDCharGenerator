@@ -1,3 +1,13 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var DNDCharacterGenerator;
 (function (DNDCharacterGenerator) {
     /**
@@ -114,9 +124,8 @@ var DNDCharacterGenerator;
              * @param speed The base speed of characters of the current race in feet.
              * @param languages A list of the languages commonly spoken by characters of the current race.
              * @param traits A list of the traits granted by the current race.
-             * @param abilityAdjustments A list of ability adjustments that the current race applies to a character.
              */
-            function Race(name, description, age, alignment, size, speed, languages, traits, abilityAdjustments) {
+            function Race(name, description, age, alignment, size, speed, languages, traits) {
                 /** The name of the current race.*/
                 this.Name = {
                     Name: "Name",
@@ -159,12 +168,6 @@ var DNDCharacterGenerator;
                     Description: "A list of the traits granted by the current race.",
                     Value: undefined
                 };
-                /** A list of Ability adjustments that the current race applies to a character.*/
-                this.Abilityadjustments = {
-                    Name: "Ability Adjustments",
-                    Description: "A list of ability adjustments that the current race applies to a character.",
-                    Value: undefined
-                };
                 this.Name.Value = name;
                 this.Description.Value = description;
                 this.Age.Value = age;
@@ -173,7 +176,6 @@ var DNDCharacterGenerator;
                 this.Speed.Value = speed;
                 this.Languages.Value = languages;
                 this.Traits.Value = traits;
-                this.Abilityadjustments.Value = abilityAdjustments;
             }
             return Race;
         }());
@@ -599,6 +601,25 @@ var DNDCharacterGenerator;
             return Trait;
         }());
         Library.Trait = Trait;
+        var AbilityIncrease = (function (_super) {
+            __extends(AbilityIncrease, _super);
+            /**
+             * An ability modification provided by a race or sub race as a trait.
+             * @param name The name of the trait.
+             * @param description A description of the trait.
+             * @param shortdescription A short description of the trait to be used in notes.
+             * @param ability The ability to be modified.
+             * @param bonus The bonus to be applied to the ability's score.
+             */
+            function AbilityIncrease(name, description, shortdescription, ability, bonus) {
+                var _this = _super.call(this, name, description, shortdescription) || this;
+                _this.Ability = ability;
+                _this.Bonus = bonus;
+                return _this;
+            }
+            return AbilityIncrease;
+        }(Trait));
+        Library.AbilityIncrease = AbilityIncrease;
         var Weapon = (function () {
             /**
              * A weapon for attacking.
