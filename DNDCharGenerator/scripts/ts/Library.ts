@@ -730,23 +730,60 @@
                 Description:"The name of the weapon",
                 Value: <string>undefined
             }
-            public Description: IProperty<string>;
-            public Weight: IProperty<number>;
-            public Price: IProperty<number>;
-
+            /** A short description of the weapon.*/
+            public Description: IProperty<string> = {
+                Name: "Description",
+                Description: "A short description of the weapon.",
+                Value: <string>undefined
+            };
+            /** The weapon's weight.*/
+            public Weight: IProperty<number> = {
+                Name: "Weight",
+                Description: "The weapon's weight",
+                Value: <number>undefined
+            };
+            /** The weapon's price.*/
+            public Price: IProperty<number> = {
+                Name: "Price",
+                Description: "The weapon's price",
+                Value: <number>undefined
+            };
             /** Declares whether the weapon is melee or ranged.*/
-            Type: IProperty<weaponRangeType>;
+            Type: IProperty<weaponRangeType> = {
+                Name: "Type",
+                Description: "Declares whether the weapon is melee or ranged.",
+                Value: <weaponRangeType>undefined
+            };
             /** Declares whether the weapon has the finesse property.*/
-            HasFinesse: IProperty<boolean>;
+            HasFinesse: IProperty<boolean> = {
+                Name: "Finesse",
+                Description: "Declares whether the weapon has the finesse property.",
+                Value: <boolean>undefined
+            };
             /** Declares whether the weapon is throwable.*/
-            IsThrown: IProperty<boolean>;
-            /** States the damage die*/
-            Damage: IProperty<IRoll>;
-            /** The weapon's damage type*/
-            DamageType: IProperty<weaponDamageType>;
-            /** States the secondary damage die*/
-            SecondaryDamage: IProperty<IRoll>;
-
+            IsThrown: IProperty<boolean> = {
+                Name: "Thrown",
+                Description: "Declares whether the weapon is thrown.",
+                Value: <boolean>undefined
+            };
+            /** States the damage die.*/
+            Damage: IProperty<IRoll> = {
+                Name: "Damage",
+                Description: "States the damage die.",
+                Value: <IRoll>undefined
+            };
+            /** The weapon's damage type.*/
+            DamageType: IProperty<weaponDamageType> = {
+                Name: "Damage Type",
+                Description: "The weapon's damage type.",
+                Value: <weaponDamageType>undefined
+            };
+            /** States the secondary damage die.*/
+            SecondaryDamage: IProperty<IRoll> = {
+                Name: "Secondary Damage",
+                Description: "States the secondary damage die.",
+                Value: <IRoll>undefined
+            };
         }
     }
 }

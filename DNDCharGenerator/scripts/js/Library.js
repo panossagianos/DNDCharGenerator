@@ -620,6 +620,60 @@ var DNDCharacterGenerator;
                     Description: "The name of the weapon",
                     Value: undefined
                 };
+                /** A short description of the weapon.*/
+                this.Description = {
+                    Name: "Description",
+                    Description: "A short description of the weapon.",
+                    Value: undefined
+                };
+                /** The weapon's weight.*/
+                this.Weight = {
+                    Name: "Weight",
+                    Description: "The weapon's weight",
+                    Value: undefined
+                };
+                /** The weapon's price.*/
+                this.Price = {
+                    Name: "Price",
+                    Description: "The weapon's price",
+                    Value: undefined
+                };
+                /** Declares whether the weapon is melee or ranged.*/
+                this.Type = {
+                    Name: "Type",
+                    Description: "Declares whether the weapon is melee or ranged.",
+                    Value: undefined
+                };
+                /** Declares whether the weapon has the finesse property.*/
+                this.HasFinesse = {
+                    Name: "Finesse",
+                    Description: "Declares whether the weapon has the finesse property.",
+                    Value: undefined
+                };
+                /** Declares whether the weapon is throwable.*/
+                this.IsThrown = {
+                    Name: "Thrown",
+                    Description: "Declares whether the weapon is thrown.",
+                    Value: undefined
+                };
+                /** States the damage die.*/
+                this.Damage = {
+                    Name: "Damage",
+                    Description: "States the damage die.",
+                    Value: undefined
+                };
+                /** The weapon's damage type.*/
+                this.DamageType = {
+                    Name: "Damage Type",
+                    Description: "The weapon's damage type.",
+                    Value: undefined
+                };
+                /** States the secondary damage die.*/
+                this.SecondaryDamage = {
+                    Name: "Secondary Damage",
+                    Description: "States the secondary damage die.",
+                    Value: undefined
+                };
             }
             ;
             return Weapon;
