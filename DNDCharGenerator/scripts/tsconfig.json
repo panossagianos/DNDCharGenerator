@@ -1,0 +1,12 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "noEmitOnError": true,
+    "noImplicitAny": false,
+    "outDir": "js",
+    "removeComments": false,
+    "rootDir": "ts",
+    "sourceMap": true,
+    "target": "es5"
+  }
+}
