@@ -517,7 +517,26 @@
                 let results: IAbility[] = this.Abilities.Value.filter(function (checkName) {
                     return checkName.Name.Value == name;
                 });
-                let result: IAbility = (results) ? results[0] : new Ability(name, name, new String3(name).Value, 0);
+                let result: IAbility = (results && results.length && results.length > 0) ? results[0] : new Ability(name, name, new String3(name).Value, 0);
+
+                // Add Race Ability adjustments.
+                this.Race.Value.Traits.Value.forEach(function (item) {
+                    if (item instanceof AbilityIncrease) {
+                        if (item.Ability.Name.Value == name) {
+                            result.Score.Value += item.Bonus;
+                        }
+                    }
+                });
+
+                // Add Subrace Ability adjustments.
+                this.SubRace.Value.Traits.Value.forEach(function (item) {
+                    if (item instanceof AbilityIncrease) {
+                        if (item.Ability.Name.Value == name) {
+                            result.Score.Value += item.Bonus;
+                        }
+                    }
+                });
+
                 return result;
             }
 
@@ -613,7 +632,7 @@
             };
             /** The total weight of items that the character can carry.*/
             get TotalCarryingWeight() {
-                let strScore = this.getAbilityByName("Strength").Score.Value;
+                let strScore = this.Strength.Score.Value;
                 return {
                     Name: "Carrying Weight",
                     Description: "The total weight of items that the character can carry.",
@@ -622,7 +641,7 @@
             };
             /** The character's Armor Class.*/
             get AC() {
-                let dexMod = this.getAbilityByName("Dexterity").Modifier.Value;
+                let dexMod = this.Dexterity.Modifier.Value;
                 return {
                     Name: "AC",
                     Description: "The character's Armor Class",
@@ -631,13 +650,38 @@
             };
             /** The order in which the character's turn comes in combat.*/
             get Initiative() {
-                let dexMod = this.getAbilityByName("Dexterity").Modifier.Value;
+                let dexMod = this.Dexterity.Modifier.Value;
                 return {
                     Name: "Initiative",
                     Description: "The order in which the character's turn comes in combat.",
                     Value: dexMod
                 }
             }
+            /** The Character's strength Ability.*/
+            get Strength() {
+                return this.getAbilityByName("Strength");
+            }
+            /** The Character's dexterity Ability.*/
+            get Dexterity() {
+                return this.getAbilityByName("Dexterity");
+            }
+            /** The Character's constitution Ability.*/
+            get Constitution() {
+                return this.getAbilityByName("Constitution");
+            }
+            /** The Character's intelligence Ability.*/
+            get Intelligence() {
+                return this.getAbilityByName("Intelligence");
+            }
+            /** The Character's wisdom Ability.*/
+            get Wisdom() {
+                return this.getAbilityByName("Wisdom");
+            }
+            /** The Character's strength Ability.*/
+            get Charisma() {
+                return this.getAbilityByName("Charisma");
+            }
+
         }
         export class Skill implements ISkill {
             /**

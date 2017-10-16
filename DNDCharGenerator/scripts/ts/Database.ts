@@ -69,6 +69,13 @@ namespace DNDCharacterGenerator {
             export let charisma = new lib.Ability("Charisma", "Measures force of personality.", "Cha", undefined);
         }
         /**
+         * The player characters of the application. (initially one)
+         */
+        export namespace Characters {
+            export let character = new lib.Character();
+            character.Abilities.Value = [Abilities.strength, Abilities.dexterity, Abilities.constitution, Abilities.intelligence, Abilities.wisdom, Abilities.charisma];
+        }
+        /**
          * All available skills.
          */
         export namespace Skills {
@@ -302,7 +309,7 @@ namespace DNDCharacterGenerator {
             export let hillDwarf = new lib.SubRace("Hill Dwarf"
                 , "As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience."
                 , Races.dwarf
-                , [Traits.dwarvenToughness]);
+                , [Traits.dwarvenToughness, Traits.wisdomIncrease1]);
         }
-    }    
+    }
 }
